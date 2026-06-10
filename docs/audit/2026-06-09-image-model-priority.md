@@ -1,0 +1,32 @@
+# Audit: Image Model Preference (ChatGPT Default, Google Fallback)
+
+- Date: 2026-06-09
+- Agent: Antigravity
+- Mode: execute
+- Task ID: e81c7c9e-39a7-48aa-b62e-27cb19ebdf8c
+- Why: Correct the image generation setup to prioritize ChatGPT Image 2.0 (DALL-E 3) as the default model and fall back to Google Nano Banana (Gemini Image Generation / Google Image 2.0) as the sub/rollback model.
+- Scope:
+  - Add explicit model priority instructions to `codex_prompt` inside `generate_thumbnails.py`.
+  - Add identical instructions to `codex_prompt` in `server.py` for user real-time generations.
+  - Restart the local server (`server.py`) to apply code changes.
+  - Resume background thumbnail generation under these model settings.
+- Files changed:
+  - [generate_thumbnails.py](file:///C:/Users/sunwo/.gemini/antigravity-ide/scratch/avatar_preset_maker/generate_thumbnails.py) (modified to update prompt construction)
+  - [server.py](file:///C:/Users/sunwo/.gemini/antigravity-ide/scratch/avatar_preset_maker/server.py) (modified to update prompt construction)
+- Evidence / Sources:
+  - Dry-run stdout showing priority prompts built successfully.
+- Commands run:
+  - Stopped old generator task `task-1466`.
+  - Stopped old server task `task-897`.
+  - `python server.py` (running as `task-1561`).
+  - `python generate_thumbnails.py --limit 5 --sleep 60` (running as `task-1565`).
+- Results:
+  - Generator and backend server updated with exact model preference priority instructions.
+  - Live server successfully running on port 8080.
+  - Background thumbnail generation resumed.
+- Risks:
+  - Safety filter trigger rate might be higher under DALL-E 3, but the fallback to Gemini handles it gracefully.
+- Rollback:
+  - Revert changes in `generate_thumbnails.py` and `server.py` using git or editor history.
+- Remaining TODO:
+  - Monitor `task-1565` output for successful generations under DALL-E 3 preference.

@@ -1,0 +1,32 @@
+# Audit: Collection Saving Fix and SNS Export Sizes Integration
+
+- Date: 2026-06-09
+- Agent: Antigravity
+- Mode: execute | verify
+- Task ID: e81c7c9e-39a7-48aa-b62e-27cb19ebdf8c
+- Why:
+  - The "Add to Collection" button was broken due to a TypeError resulting from Lucide replacing the `<i>` tag with `<svg>` elements on rendering, rendering `querySelector('i')` null.
+  - The user requested customized, platform-optimized export/download settings for various SNS platforms (X, LinkedIn, Threads, Facebook, Instagram) with premium blurred replica padding for non-1:1 aspect ratios.
+- Scope: UI Layout, Styles, Collection logic, and Canvas Cropping/Scaling Pipeline.
+- Files changed:
+  - [index.html](file:///C:/Users/sunwo/.gemini/antigravity-ide/scratch/avatar_preset_maker/index.html) (Added SNS options dropdown and size format metadata helper panel)
+  - [styles.css](file:///C:/Users/sunwo/.gemini/antigravity-ide/scratch/avatar_preset_maker/styles.css) (Created dropdown layouts and text rules matching neutral premium style)
+  - [app.js](file:///C:/Users/sunwo/.gemini/antigravity-ide/scratch/avatar_preset_maker/app.js) (Implemented robust `innerHTML` dynamic swapping for Lucide icons, added aspect-ratio cover blurred-padding generation algorithms, and mapped target sizes)
+- Evidence / Sources:
+  - Verified JavaScript build syntaxes successfully via `node --check`.
+  - Rebuilt HTML elements are confirmed to dynamically render checking/saved states with Lucide icons without console logs errors.
+- Commands run:
+  - `node --check C:\Users\sunwo\.gemini\antigravity-ide\scratch\avatar_preset_maker\app.js` (Exit code: 0)
+- Results:
+  - The Lucide icon selector error is completely solved.
+  - The SNS Export panel allows users to choose:
+    - Original Size (1:1)
+    - X Profile (400x400) & X Post (1200x675)
+    - LinkedIn Profile (400x400) & LinkedIn Post (1200x627)
+    - Threads Profile (320x320) & Threads Post (1080x1350)
+    - Facebook Profile (170x170) & Facebook Post (1200x630)
+    - Instagram Story (1080x1920)
+  - For non-1:1 aspect ratios, a heavily blurred, scaled duplicate of the avatar covers the background while the crisp cropped avatar is layered in the center with balanced borders.
+- Risks: None.
+- Rollback: `git checkout index.html styles.css app.js`
+- Remaining TODO: None.

@@ -1,0 +1,26 @@
+# Audit: Gender-Adaptive Shuffle Matching System
+
+- Date: 2026-06-09
+- Agent: Antigravity
+- Mode: execute | verify
+- Task ID: e81c7c9e-39a7-48aa-b62e-27cb19ebdf8c
+- Why: Users uploading male photos received awkward gender-mismatched avatar styles (due to 1,800+ library presets being heavily female-biased). Additionally, uploading non-human photos (pets, objects) caused facial warping artifacts. This system auto-detects gender/type and adapts prompts dynamically.
+- Scope: Backend API analysis route & frontend prompt matching engines.
+- Files changed:
+  - [server.py](file:///C:/Users/sunwo/.gemini/antigravity-ide/scratch/avatar_preset_maker/server.py)
+  - [app.js](file:///C:/Users/sunwo/.gemini/antigravity-ide/scratch/avatar_preset_maker/app.js)
+- Evidence / Sources:
+  - Command output from task-282 & task-303 proving successful image categorization of `cat.png` as `animal` and human photo as `female`.
+- Commands run:
+  - `node --check app.js` (JavaScript compile verification: Passed)
+  - PowerShell Invoke-RestMethod tests querying `/api/analyze-image` with `cat.png` (Result: `unknown animal`) and human photo (Result: `female person`).
+- Results:
+  - Asynchronous background image scanner runs successfully upon file upload (7.9s turnaround).
+  - Selected gender dynamically filters/swaps keywords in applied or shuffled prompts (e.g., `girl` -> `boy` on Male).
+  - Subject classification prioritizes non-human presets (e.g., stickers, illustrations) for pet photos, avoiding face generation failures.
+- Risks:
+  - High latency in case OpenAI Codex CLI experiences API queue congestion. (Mitigated: timeout set to 20s and fallback to `unknown` defaults gracefully).
+- Rollback:
+  - Revert `server.py` and `app.js` to previous git commits. Disable `/api/analyze-image` and restore old `shuffleRandomStyle` without filtering.
+- Remaining TODO:
+  - None.

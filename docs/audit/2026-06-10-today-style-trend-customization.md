@@ -1,0 +1,37 @@
+# Audit: Today's Style (SNS Photo Trends/Memes) Customization & Scheduling
+
+- Date: 2026-06-10
+- Agent: Antigravity
+- Mode: execute | verify
+- Task ID: task-2490 / task-2516
+- Why: SNS 최신 유행 사진 트렌드/밈을 매일 제공하여 유저의 프로필 사진에 바로 활용하고 공유하게끔 만드는 기능 구축
+- Scope: 
+  - `update_today_style.py` 작성 및 Codex DALL-E 3 연계
+  - `index.html` & `app.js` UI 연동
+  - `server.py` GET `/api/today-style` 핸들러 및 생성 분기 확인
+  - `schedule` 툴을 활용한 정기 갱신 크론 스케줄링 등록
+- Files changed:
+  - [NEW] [update_today_style.py](file:///C:/Users/sunwo/.gemini/antigravity-ide/scratch/avatar_preset_maker/update_today_style.py)
+  - [MODIFY] [index.html](file:///C:/Users/sunwo/.gemini/antigravity-ide/scratch/avatar_preset_maker/index.html)
+  - [MODIFY] [app.js](file:///C:/Users/sunwo/.gemini/antigravity-ide/scratch/avatar_preset_maker/app.js)
+  - [MODIFY] [generate_thumbnails.py](file:///C:/Users/sunwo/.gemini/antigravity-ide/scratch/avatar_preset_maker/generate_thumbnails.py) (ephemeral 플래그 추가 수정)
+- Evidence / Sources:
+  - 썸네일 이미지: `assets/today_style_preview.png` (2.6MB 성공적 생성)
+  - 브라우저 검증 스크린샷: `C:\Users\sunwo\.gemini\antigravity-ide\brain\e81c7c9e-39a7-48aa-b62e-27cb19ebdf8c\style_library_today_meme_1781066005647.png`
+  - 브라우저 검증 비디오: `C:\Users\sunwo\.gemini\antigravity-ide\brain\e81c7c9e-39a7-48aa-b62e-27cb19ebdf8c/today_style_flow_1781065965982.webp`
+- Commands run:
+  - `python update_today_style.py` (성공 종료)
+  - `python final_stats.py` (다양성 썸네일 현황 검증)
+- Results:
+  - **오늘의 Style 시스템 완성**: 매일 10종의 고선명 다인종/다문화 밈 프롬프트 컬렉션 중 오늘 날짜(1년 중 일자 기준)에 해당하는 트렌드를 선택하여 `today-style.json`을 갱신.
+  - **DALL-E 3 기반 썸네일 자동화**: Codex CLI exec 에 `--ephemeral` 플래그 및 `stdin=subprocess.DEVNULL`을 조합해 대기 루프 없이 완전 자동화된 `assets/today_style_preview.png` 생성 흐름 정착.
+  - **크론 스케줄링 완수**: `schedule` 툴을 사용해 매일 자정(`0 0 * * *`) 스크립트 실행 노티피케이션 스케줄러(`task-2413`) 세팅 완료.
+  - **UI 정상 연동**: 프리셋 선택 그리드에 "Today's Style" 프리셋 아이콘/버튼이 노출되고 클릭 시 프롬프트가 동적 바인딩됨. 모달 라이브러리에 "오늘의 밈 🔥" 카테고리가 핫핑크 액티브 컬러 및 불꽃 로고로 포인트 강조되어 렌더링되며, 클릭 시 오늘의 Style 카드와 썸네일이 정상 렌더링됨.
+- Risks: 
+  - OpenAI API 할당량 초과(Quota) 리스크. 이를 대비해 갱신 스케줄을 1일 1회(자정)로 엄밀하게 제한하고, 생성 실패 시 기본 캐시 이미지(`cat.png`)로 조용히(soft fallback) 대체하도록 예외처리함.
+- Rollback:
+  - `git checkout -- index.html app.js generate_thumbnails.py`
+  - `rm today-style.json update_today_style.py assets/today_style_preview.png`
+  - `manage_task kill e81c7c9e-39a7-48aa-b62e-27cb19ebdf8c/task-2413` (스케줄 작업 취소)
+- Remaining TODO:
+  - 백그라운드 태스크 `task-2509` (다양성 144개 썸네일 재생성) 완수 대기 및 수시 체크.

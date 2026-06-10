@@ -1,0 +1,33 @@
+# Audit: Async Generation Job Queue Implementation
+
+- Date: 2026-06-08
+- Agent: Antigravity
+- Mode: execute | verify
+- Task ID: 31b6948b-490d-430b-8c83-624736ac4d44
+- Why:
+  - The previous execution model using `subprocess.run` block-waited on the Codex CLI execution.
+  - This block-wait timed out on the HTTP server layer because the server took more than 30s to respond, leading to client-side request timeout errors.
+  - Converting the generation flow to an asynchronous job system resolves HTTP timeouts by immediately returning a `202 Accepted` status with a `job_id` and running Codex in a separate background thread.
+- Scope:
+  - Refactored `server.py` to support multi-threaded job tracking and status polling.
+  - Configured batch file execution (`.bat`) to bypass command-line quote-escaping limitations of `cmd.exe`.
+- Files changed:
+  - [server.py](file:///C:/Users/sunwo/.gemini/antigravity-ide/scratch/avatar_preset_maker/server.py)
+- Evidence / Sources:
+  - Verified connection state of the Codex CLI daemon (`connected` to ChatGPT).
+  - Background task `task-1389` output logs showing successful job dispatch and polling transitions.
+- Commands run:
+  - `python "C:\Users\sunwo\.gemini\antigravity-ide\brain\31b6948b-490d-430b-8c83-624736ac4d44\scratch\test_async_job.py"`
+- Results:
+  - `POST /api/generate` returns `202 Accepted` with a unique hex ID and status `pending`.
+  - `GET /api/generate/<job_id>` polls the job's execution status:
+    - Returns `pending` while the background thread executes Codex CLI.
+    - Returns `done` along with base64-encoded image data when execution succeeds.
+    - Returns `error` with trailing error logs when execution fails.
+  - Escaped strings containing single and double quotes are correctly parsed via temporary batch files (`gen_<job_id>.bat`).
+- Risks:
+  - Jobs are currently stored in-memory. A server restart will flush active and completed jobs. (Acceptable for prototype).
+- Rollback:
+  - Restore the previous version of `server.py` that block-waited on the subprocess call.
+- Remaining TODO:
+  - None.

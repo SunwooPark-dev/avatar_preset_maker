@@ -1,0 +1,33 @@
+# Audit: Mobile responsive hardening and preset upgrades
+
+- Date: 2026-06-09
+- Agent: Antigravity
+- Mode: execute
+- Task ID: e81c7c9e-39a7-48aa-b62e-27cb19ebdf8c
+- Why: Streamline style presets (removing Original and Cyberpunk, leaving Corporate, Travel, and Cinematic) and optimize the layout and interactions for mobile viewports (Mobile CSS Hardening).
+- Scope: styles.css, app.js, index.html
+- Files changed:
+  - [styles.css](file:///C:/Users/sunwo/.gemini/antigravity-ide/scratch/avatar_preset_maker/styles.css)
+- Evidence / Sources:
+  - [styles.css](file:///C:/Users/sunwo/.gemini/antigravity-ide/scratch/avatar_preset_maker/styles.css)
+  - [app.js](file:///C:/Users/sunwo/.gemini/antigravity-ide/scratch/avatar_preset_maker/app.js)
+  - [index.html](file:///C:/Users/sunwo/.gemini/antigravity-ide/scratch/avatar_preset_maker/index.html)
+- Commands run:
+  - `node --check app.js` (Exit code: 0)
+  - `python verify_test.py`
+- Results:
+  - Adjusted `.preset-grid` columns from 2 to 3, matching the new 3-preset deck (Corporate, Travel, Cinematic) and eliminating empty grid slots.
+  - Implemented an invisible wider touch grab target (24px width, 1px line visual styling via pseudo-element) on `.split-slider-bar` for significantly better mobile/touch slider responsiveness.
+  - Added comprehensive mobile `@media (max-width: 768px)` overrides:
+    - Reduced body padding to 10px and config/output panel paddings to 20px to maximize content area.
+    - Stacked header vertically and aligned contents.
+    - Optimized preset card font sizes (0.75rem / 0.6rem) and cell spacing (12px 6px) to fit 3-column rows without text overflow.
+    - Reduced output display frame height to 340px to fit mobile screen folds.
+    - Stacked filter sliders, SNS options, and action buttons vertically.
+    - Shrank gallery item min-width to 130px to support multiple columns on mobile.
+- Risks:
+  - Text wrapping in preset cards on extremely small viewports (<320px). Mitigated with small font sizes and display flex spacing.
+- Rollback:
+  - Revert the modifications in `styles.css`.
+- Remaining TODO:
+  - Ensure all system-wide 3-axis verification tests pass cleanly.

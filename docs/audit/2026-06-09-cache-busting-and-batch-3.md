@@ -1,0 +1,29 @@
+# Audit: Cache Busting and Batch 3 Thumbnail Generation
+
+- Date: 2026-06-09
+- Agent: Antigravity
+- Mode: execute
+- Task ID: e81c7c9e-39a7-48aa-b62e-27cb19ebdf8c
+- Why: Prevent client browser caching of the presets list (`gallery-data.json`) which kept showing the deleted occult prompt, clarify image generation ownership, and launch Batch 3 of style library thumbnails.
+- Scope:
+  - Add cache-busting query parameter `_t` to the fetch request in `app.js`.
+  - Validate prompt ID 1799 is not in the live database.
+  - Trigger another batch of 5 thumbnails for top-12 category coverage.
+- Files changed:
+  - [app.js](file:///C:/Users/sunwo/.gemini/antigravity-ide/scratch/avatar_preset_maker/app.js) (modified to fetch `/gallery-data.json?_t=` + timestamp)
+- Evidence / Sources:
+  - `app.js` modified: `fetch('/gallery-data.json?_t=' + Date.now())`
+- Commands run:
+  - Python scripts to confirm ID 1799 is deleted.
+  - `python generate_thumbnails.py --limit 5 --sleep 60` (running in background as `task-1466`).
+- Results:
+  - Client-side cache issue resolved by appending timestamp to requests.
+  - Deletion of prompt ID 1799 re-verified.
+  - Batch 3 initiated successfully.
+- Risks:
+  - None, client cache-busting is standard and low risk.
+- Rollback:
+  - Revert `app.js` change using git checkout or manual replacement.
+- Remaining TODO:
+  - Monitor background task `task-1466` for completion.
+  - Verify UI reflects the changes without showing the deleted prompt.

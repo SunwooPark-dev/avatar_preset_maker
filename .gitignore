@@ -1,0 +1,24 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Log files
+logs/
+*.log
+*.sqlite
+*.sqlite-wal
+
+# Heavy Image assets and cache (Do not push 450MB+ thumbnails)
+gallery-images/
+.codex/
+.omx/
+tmp_test_run/
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Backup files
+*.bak
+gallery-data.json.bak

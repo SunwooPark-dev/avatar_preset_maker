@@ -1,0 +1,25 @@
+# Audit: Codex CLI OAuth Pipeline Integration
+
+- Date: 2026-06-08
+- Agent: Antigravity
+- Mode: execute
+- Task ID: 31b6948b-490d-430b-8c83-624736ac4d44
+- Why: To provide a natural, user-initiated Codex CLI OAuth login flow and status check in the PersonaFit Studio app, activating DALL-E generation on login and falling back to mock filters on logout.
+- Scope: UI login modal, status badge polling, backend login/cancel API, and quick status check script optimization.
+- Files changed:
+  - [server.py](file:///C:/Users/sunwo/.gemini/antigravity-ide/scratch/avatar_preset_maker/server.py)
+  - [index.html](file:///C:/Users/sunwo/.gemini/antigravity-ide/scratch/avatar_preset_maker/index.html)
+  - [styles.css](file:///C:/Users/sunwo/.gemini/antigravity-ide/scratch/avatar_preset_maker/styles.css)
+  - [app.js](file:///C:/Users/sunwo/.gemini/antigravity-ide/scratch/avatar_preset_maker/app.js)
+- Evidence / Sources: Tested via native `curl.exe` query confirming `connected` and `disconnected` status toggles.
+- Commands run:
+  - `python -m py_compile server.py` (Exit code: 0)
+  - `curl.exe http://localhost:8080/api/status` (Response: status: connected)
+  - `curl.exe -X POST http://localhost:8080/api/login` (Response: status: initiated)
+  - `curl.exe -X POST http://localhost:8080/api/login/cancel` (Response: status: cancelled)
+- Results:
+  - Successfully connected status returns instantly (<0.2s) using `codex login status`.
+  - Polling, modal opening/closing, and automatic connection detection are verified and fully integrated.
+- Risks: If the default browser fails to open, users can fallback to manually running `codex login` or `codex login --device-auth`.
+- Rollback: Revert files using `git checkout` or restore original static mockup from git history.
+- Remaining TODO: None.

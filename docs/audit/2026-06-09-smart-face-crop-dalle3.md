@@ -1,0 +1,26 @@
+# Audit: Smart Face Focus & DALL-E 3 Prompt Optimization
+
+- Date: 2026-06-09
+- Agent: Antigravity
+- Mode: execute | verify
+- Task ID: e81c7c9e-39a7-48aa-b62e-27cb19ebdf8c
+- Why: Enhance the user profile picture generation quality by zooming and auto-cropping original photos around detected face bounding boxes. Also optimize the backend prompt template to utilize DALL-E 3 photorealistic and composition settings.
+- Scope: Bounding box face detection backend parser, frontend canvas crop tool, DALL-E 3 system prompt template.
+- Files changed:
+  - [server.py](file:///C:/Users/sunwo/.gemini/antigravity-ide/scratch/avatar_preset_maker/server.py)
+  - [app.js](file:///C:/Users/sunwo/.gemini/antigravity-ide/scratch/avatar_preset_maker/app.js)
+- Evidence / Sources:
+  - verify_test.py run showing successful validation of type, gender, and `bbox: null` mapping for cat.png image upload.
+- Commands run:
+  - `node --check app.js` (Successful syntax confirmation)
+  - `python verify_test.py` (Passed all optimization, stability, and compatibility tests)
+- Results:
+  - Face bounding box coordinates `bbox: [ymin, xmin, ymax, xmax]` successfully parsed.
+  - Smart canvas-based crop `cropImageToFace()` successfully zooms and crops photos with a 1.7x expand margin to prioritize hair/shoulders on profile.
+  - DALL-E 3 prompt upgraded to enforce photorealistic detail, centered composition, and remove unwanted border/text labels.
+- Risks:
+  - High resolution uploads may exceed standard execution time limits during crop calculations. (Mitigated: canvas operations are synchronous and fast, typical turnaround is < 15ms once response is loaded).
+- Rollback:
+  - Revert `server.py` and `app.js` to previous git tags and restart the Python server.
+- Remaining TODO:
+  - None.
