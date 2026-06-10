@@ -14,8 +14,11 @@ from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 PORT = 8080
 
 def find_codex_cli():
+    if os.name != 'nt':
+        return "codex"
     import glob
-    base_dir = r"C:\Users\sunwo\AppData\Local\OpenAI\Codex\bin"
+    home = os.path.expanduser("~")
+    base_dir = os.path.join(home, "AppData", "Local", "OpenAI", "Codex", "bin")
     if not os.path.exists(base_dir):
         return "codex"
     exe_files = glob.glob(os.path.join(base_dir, "**", "codex.exe"), recursive=True)
@@ -206,7 +209,8 @@ def _run_generation_job(
 
     def image_polling_worker(sid):
         nonlocal success
-        gen_dir = os.path.join(r"C:\Users\sunwo\.codex\generated_images", sid)
+        home = os.path.expanduser("~")
+        gen_dir = os.path.join(home, ".codex", "generated_images", sid)
         img_poll_start = time.time()
         while time.time() - img_poll_start < 240:
             # First check if output_job_id.png was copied to work_dir by codex itself

@@ -2,5 +2,6 @@
   "theme": "Y2K Retro Camcorder",
   "description": "2000년대 Y2K 감성 저화질 디카 플래시 뷰티",
   "prompt": "Authentic Y2K early 2000s digital camera flash photography style portrait. High-contrast harsh direct flash, slightly soft focus, subtle lens glare, chromatic aberration, minor digital noise. Cool tone-balancing, pale blue and silver color grading. East Asian woman of mixed heritage wearing metallic puffer jacket and oversized futuristic sunglasses. Background: dark neon street alley at night. Expression: confident, playful look. Mood: nostalgic pop culture, Myspace era aesthetic.",
-  "category": "photo"
+  "category": "photo",
+  "thumbnail": "/assets/today_style_preview.png"
 }

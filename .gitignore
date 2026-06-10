@@ -22,3 +22,12 @@ Thumbs.db
 # Backup files
 *.bak
 gallery-data.json.bak
+
+# Secrets
+.env
+
+# Generated images
+output_*.png
+source_*.png
+source.png
+test_async_real_output.png
