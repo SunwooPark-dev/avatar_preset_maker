@@ -1,0 +1,28 @@
+# Audit: Multi-Language Support & Parameter Tooltips Implementation
+
+- Date: 2026-06-10
+- Agent: Antigravity
+- Mode: execute | verify
+- Task ID: e81c7c9e-39a7-48aa-b62e-27cb19ebdf8c
+- Why: 
+  - To support 5 languages (English, Spanish, Chinese, Japanese, Korean) without language mixing.
+  - To replace verbose parameter helper text paragraphs with elegant, hoverable info badges (`!`) displaying tooltips.
+- Scope: Frontend localization and parameter tuning UX.
+- Files changed:
+  - `index.html`: Added parameter info badges, updated presets grid layouts, and added `data-i18n` attributes.
+  - `app.js`: Added the `applyLanguage(lang)` translation engine and helpers to dynamically localize today's style info, connection status badge/button labels, SNS crop preview details, minigame labels, rolling loading statuses, and toasts. Moved several variables to the global scope to eliminate Temporal Dead Zone (TDZ) bugs.
+  - `tests/verify_ux_hurdles.py`: Updated Playwright E2E verification to switch language to EN/KO and check info badge visibility.
+- Evidence / Sources:
+  - Playwright E2E screenshots located at `tests/screenshots/`
+- Commands run:
+  - `python tests/verify_ux_hurdles.py` (Completed successfully with exit code 0)
+- Results:
+  - All E2E test cases passed successfully.
+  - Verified multi-language selection, tooltip visibility, and loading message translation on local server.
+  - Resolved TDZ console errors relating to `cachedTodayStyleData`, `memoryTimerInterval`, `allPrompts`, and `snsPresets`.
+- Risks:
+  - Text length discrepancies in different languages causing tooltips to wrap poorly. Mitigated by setting tooltip styles to `width: 200px`, `white-space: normal`, and `line-height: 1.4` in CSS.
+- Rollback:
+  - `git restore index.html app.js tests/verify_ux_hurdles.py`
+- Remaining TODO:
+  - Git commit changes.

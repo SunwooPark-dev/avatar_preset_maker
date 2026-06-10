@@ -21,18 +21,27 @@
       <div class="header-left">
         <div class="brand">
           <span class="brand-dot"></span>
-          <h1>PersonaFit Studio</h1>
+          <h1 data-i18n="app_title">PersonaFit Studio</h1>
         </div>
-        <p class="subtitle">Art-directed profile editor. Adjust parameters to configure your visual identity.</p>
+        <p class="subtitle" data-i18n="app_subtitle">Art-directed profile editor. Adjust parameters to configure your visual identity.</p>
       </div>
       <div class="header-right">
         <div class="codex-status-container">
-          <button class="status-btn" id="check-connection-btn" title="Check connection to Codex">
+          <div class="lang-selector-wrapper">
+            <select id="lang-select" class="lang-select">
+              <option value="ko">한국어</option>
+              <option value="en">English</option>
+              <option value="es">Español</option>
+              <option value="zh">中文</option>
+              <option value="ja">日本語</option>
+            </select>
+          </div>
+          <button class="status-btn" id="check-connection-btn" data-i18n-title="check_connection" title="Check connection to Codex">
             <i data-lucide="refresh-cw" class="icon-spin"></i>
           </button>
-          <span class="status-badge disconnected" id="codex-status-badge">Codex Link Offline</span>
+          <span class="status-badge disconnected" id="codex-status-badge" data-i18n="codex_offline">Codex Link Offline</span>
           <button class="connect-btn" id="connect-codex-btn">
-            <i data-lucide="key" class="btn-icon-inline"></i> <span id="connect-btn-label">Login</span>
+            <i data-lucide="key" class="btn-icon-inline"></i> <span id="connect-btn-label" data-i18n="login">Login</span>
           </button>
         </div>
       </div>
@@ -45,7 +54,7 @@
       <section class="config-panel">
         <div class="panel-header">
           <span class="step-num">01</span>
-          <h2>Source Photo</h2>
+          <h2 data-i18n="source_photo_title">Source Photo</h2>
         </div>
 
         <!-- Uploader Zone -->
@@ -53,8 +62,8 @@
           <input type="file" id="file-input" accept="image/*" class="file-input">
           <div class="upload-content" id="upload-content-placeholder">
             <i data-lucide="plus" class="upload-icon"></i>
-            <p class="upload-text">Upload target image</p>
-            <p class="upload-info">Drag and drop files here</p>
+            <p class="upload-text" data-i18n="upload_text">Upload target image</p>
+            <p class="upload-info" data-i18n="upload_info">Drag and drop files here</p>
           </div>
           <div class="upload-preview-container hidden" id="upload-preview-container">
             <img id="upload-preview-img" class="upload-preview-img" src="" alt="Upload Preview">
@@ -67,7 +76,7 @@
         <!-- Privacy Shield Banner -->
         <div class="privacy-shield-banner">
           <i data-lucide="shield-check" class="shield-icon"></i>
-          <span>원본 사진은 스타일 변환 분석 완료 즉시 완전히 파기되며 서버에 저장되지 않습니다. 안심하고 사용하세요.</span>
+          <span data-i18n="privacy_shield_text">원본 사진은 스타일 변환 분석 완료 즉시 완전히 파기되며 서버에 저장되지 않습니다. 안심하고 사용하세요.</span>
         </div>
 
         <!-- Style Presets -->
@@ -75,33 +84,33 @@
           <div class="panel-header-sub" style="justify-content: space-between; width: 100%;">
             <div style="display: flex; align-items: baseline; gap: 8px;">
               <span class="step-num-sub">02</span>
-              <h3>Style Presets</h3>
+              <h3 data-i18n="style_presets_title">Style Presets</h3>
             </div>
             <div style="display:flex;gap:8px;align-items:center;">
-              <button class="text-link-btn" id="shuffle-prompt-btn" type="button" title="1800개 중 랜덤 스타일">
-                <i data-lucide="dice-6" class="btn-icon-inline" style="vertical-align:middle;"></i> 셔플
+              <button class="text-link-btn" id="shuffle-prompt-btn" type="button" data-i18n-title="shuffle_btn_title" title="1800개 중 랜덤 스타일">
+                <i data-lucide="dice-6" class="btn-icon-inline" style="vertical-align:middle;"></i> <span data-i18n="shuffle_btn_text">셔플</span>
               </button>
               <button class="text-link-btn" id="open-library-btn" type="button">
-                <i data-lucide="layout-grid" class="btn-icon-inline" style="vertical-align: middle;"></i> 스타일 라이브러리
+                <i data-lucide="layout-grid" class="btn-icon-inline" style="vertical-align: middle;"></i> <span data-i18n="library_btn_text">스타일 라이브러리</span>
               </button>
             </div>
           </div>
           <div class="preset-grid">
             <div class="preset-item active" data-style="professional">
-              <span class="preset-name">Corporate</span>
-              <span class="preset-desc">증명사진 (Studio ID)</span>
+              <span class="preset-name" data-i18n="preset_corporate_name">Corporate</span>
+              <span class="preset-desc" data-i18n="preset_corporate_desc">증명사진 (Studio ID)</span>
             </div>
             <div class="preset-item" data-style="travel">
-              <span class="preset-name">Travel</span>
-              <span class="preset-desc">유명 관광지 (Landmark)</span>
+              <span class="preset-name" data-i18n="preset_travel_name">Travel</span>
+              <span class="preset-desc" data-i18n="preset_travel_desc">유명 관광지 (Landmark)</span>
             </div>
             <div class="preset-item" data-style="cinematic">
-              <span class="preset-name">Cinematic</span>
-              <span class="preset-desc">영화 주인공 (Movie Hero)</span>
+              <span class="preset-name" data-i18n="preset_cinematic_name">Cinematic</span>
+              <span class="preset-desc" data-i18n="preset_cinematic_desc">영화 주인공 (Movie Hero)</span>
             </div>
             <div class="preset-item" data-style="today">
-              <span class="preset-name" id="today-preset-name">Today's Style</span>
-              <span class="preset-desc" id="today-preset-desc">로딩 중...</span>
+              <span class="preset-name" id="today-preset-name" data-i18n="preset_today_name">Today's Style</span>
+              <span class="preset-desc" id="today-preset-desc" data-i18n="preset_today_desc">로딩 중...</span>
             </div>
           </div>
         </div>
@@ -111,19 +120,19 @@
           <div class="panel-header-sub" style="justify-content: space-between; width: 100%;">
             <div style="display: flex; align-items: baseline; gap: 8px;">
               <span class="step-num-sub">03</span>
-              <h3>Custom Prompt</h3>
+              <h3 data-i18n="custom_prompt_title">Custom Prompt</h3>
             </div>
             <div class="gender-select-wrapper">
-              <label for="gender-select" class="gender-label">Gender</label>
+              <label for="gender-select" class="gender-label" data-i18n="gender_label">Gender</label>
               <select id="gender-select" class="gender-select">
-                <option value="random" selected>Random</option>
-                <option value="male">남성 (Male)</option>
-                <option value="female">여성 (Female)</option>
+                <option value="random" data-i18n="gender_random" selected>Random</option>
+                <option value="male" data-i18n="gender_male">남성 (Male)</option>
+                <option value="female" data-i18n="gender_female">여성 (Female)</option>
               </select>
             </div>
           </div>
           <div class="prompt-input-wrapper">
-            <textarea id="custom-prompt" placeholder="Specify custom styling variables (e.g., retro black and white, oil painting)..."></textarea>
+            <textarea id="custom-prompt" data-i18n-placeholder="custom_prompt_placeholder" placeholder="Specify custom styling variables (e.g., retro black and white, oil painting)..."></textarea>
             <div class="prompt-counter"><span id="char-count">0</span> / 200</div>
           </div>
         </div>
@@ -132,12 +141,15 @@
         <div class="sliders-section">
           <div class="panel-header-sub">
             <span class="step-num-sub">04</span>
-            <h3>Detail Tuning</h3>
+            <h3 data-i18n="detail_tuning_title">Detail Tuning</h3>
           </div>
           <div class="slider-group">
             <div class="slider-item">
               <div class="slider-label">
-                <span>Prompt Weight</span>
+                <span>
+                  <span data-i18n="slider_weight_title">Prompt Weight</span>
+                  <span class="info-badge" data-i18n-tooltip="slider_weight_tip">!</span>
+                </span>
                 <span id="slider-weight-val">7.5</span>
               </div>
               <input type="range" id="slider-weight" min="1" max="15" step="0.5" value="7.5">
@@ -145,7 +157,10 @@
             </div>
             <div class="slider-item">
               <div class="slider-label">
-                <span>Closeness to original</span>
+                <span>
+                  <span data-i18n="slider_closeness_title">Closeness to original</span>
+                  <span class="info-badge" data-i18n-tooltip="slider_closeness_tip">!</span>
+                </span>
                 <span id="slider-closeness-val">80%</span>
               </div>
               <input type="range" id="slider-closeness" min="10" max="100" step="5" value="80">
@@ -153,7 +168,10 @@
             </div>
             <div class="slider-item">
               <div class="slider-label">
-                <span>Detailing strength</span>
+                <span>
+                  <span data-i18n="slider_detail_title">Detailing strength</span>
+                  <span class="info-badge" data-i18n-tooltip="slider_detail_tip">!</span>
+                </span>
                 <span id="slider-detail-val">50%</span>
               </div>
               <input type="range" id="slider-detail" min="0" max="100" step="5" value="50">
@@ -164,78 +182,78 @@
 
         <!-- Generate Button -->
         <button class="primary-btn" id="generate-btn" disabled>
-          <span>Render Style</span>
+          <span data-i18n="render_btn_text">Render Style</span>
           <i data-lucide="arrow-right" class="btn-icon"></i>
         </button>
       </section>
 
-      <!-- Right Panel: Transformed Output -->
-      <section class="output-panel">
-        <div class="panel-header">
-          <span class="step-num">05</span>
-          <h2>Output Canvas</h2>
-        </div>
-
-        <!-- Main Display Frame -->
-        <div class="display-frame" id="display-frame">
-          
-          <!-- State 1: Upload Required -->
-          <div class="frame-state" id="state-upload-required">
-            <div class="frame-message">
-              <h3>Empty Workspace</h3>
-              <p>Upload a source photo to begin style configuration.</p>
-            </div>
+        <!-- Right Panel: Transformed Output -->
+        <section class="output-panel">
+          <div class="panel-header">
+            <span class="step-num">05</span>
+            <h2 data-i18n="output_canvas_title">Output Canvas</h2>
           </div>
 
-          <!-- State 2: Processing Simulator -->
-          <div class="frame-state hidden" id="state-processing">
-            <div class="progress-container">
-              <div class="spinner">
-                <div class="spinner-dot"></div>
-              </div>
-              <div class="progress-details">
-                <h3 id="processing-title">AI 아트 렌더링 중 (약 1분 소요)...</h3>
-                <div class="progress-bar-wrapper">
-                  <div class="progress-bar" id="progress-bar-fill"></div>
-                </div>
-                <p id="processing-status">Scanning color channels...</p>
+          <!-- Main Display Frame -->
+          <div class="display-frame" id="display-frame">
+            
+            <!-- State 1: Upload Required -->
+            <div class="frame-state" id="state-upload-required">
+              <div class="frame-message">
+                <h3 data-i18n="empty_workspace_title">Empty Workspace</h3>
+                <p data-i18n="empty_workspace_desc">Upload a source photo to begin style configuration.</p>
               </div>
             </div>
-            <!-- Mini-Game Container -->
-            <div class="minigame-wrapper hidden" id="minigame-wrapper">
-              <div class="minigame-tabs">
-                <button class="minigame-tab-btn active" id="tab-memory" type="button">Memory Match</button>
-                <button class="minigame-tab-btn" id="tab-tictactoe" type="button">Tic-Tac-Toe</button>
-              </div>
 
-              <!-- Game 1: Memory Match -->
-              <div class="game-container" id="game-memory-container">
-                <div class="minigame-header">
-                  <span class="minigame-title">🎮 Memory Match</span>
-                  <div class="minigame-stats">
-                    <span id="minigame-moves">0 moves</span>
-                    <span class="minigame-divider">·</span>
-                    <span id="minigame-timer">0:00</span>
-                  </div>
+            <!-- State 2: Processing Simulator -->
+            <div class="frame-state hidden" id="state-processing">
+              <div class="progress-container">
+                <div class="spinner">
+                  <div class="spinner-dot"></div>
                 </div>
-                <div class="minigame-grid" id="minigame-grid"></div>
-                <button class="minigame-restart-btn" id="minigame-restart" type="button">🔄 Restart</button>
+                <div class="progress-details">
+                  <h3 id="processing-title" data-i18n="rendering_title">AI 아트 렌더링 중 (약 1분 소요)...</h3>
+                  <div class="progress-bar-wrapper">
+                    <div class="progress-bar" id="progress-bar-fill"></div>
+                  </div>
+                  <p id="processing-status" data-i18n="rendering_status">Scanning color channels...</p>
+                </div>
               </div>
+              <!-- Mini-Game Container -->
+              <div class="minigame-wrapper hidden" id="minigame-wrapper">
+                <div class="minigame-tabs">
+                  <button class="minigame-tab-btn active" id="tab-memory" data-i18n="tab_memory" type="button">Memory Match</button>
+                  <button class="minigame-tab-btn" id="tab-tictactoe" data-i18n="tab_tictactoe" type="button">Tic-Tac-Toe</button>
+                </div>
 
-              <!-- Game 2: Tic-Tac-Toe -->
-              <div class="game-container hidden" id="game-tictactoe-container">
-                <div class="minigame-header">
-                  <span class="minigame-title">❌ Tic-Tac-Toe ⭕</span>
-                  <div class="minigame-stats">
-                    <span id="ttt-status">Your turn (X)</span>
+                <!-- Game 1: Memory Match -->
+                <div class="game-container" id="game-memory-container">
+                  <div class="minigame-header">
+                    <span class="minigame-title" data-i18n="game_memory_title">🎮 Memory Match</span>
+                    <div class="minigame-stats">
+                      <span id="minigame-moves">0 moves</span>
+                      <span class="minigame-divider">·</span>
+                      <span id="minigame-timer">0:00</span>
+                    </div>
                   </div>
+                  <div class="minigame-grid" id="minigame-grid"></div>
+                  <button class="minigame-restart-btn" id="minigame-restart" data-i18n="game_restart" type="button">🔄 Restart</button>
                 </div>
-                <div class="ttt-grid" id="ttt-grid"></div>
-                <button class="minigame-restart-btn" id="ttt-restart" type="button">🔄 Restart</button>
+
+                <!-- Game 2: Tic-Tac-Toe -->
+                <div class="game-container hidden" id="game-tictactoe-container">
+                  <div class="minigame-header">
+                    <span class="minigame-title" data-i18n="game_ttt_title">❌ Tic-Tac-Toe ⭕</span>
+                    <div class="minigame-stats">
+                      <span id="ttt-status" data-i18n="game_ttt_status">Your turn (X)</span>
+                    </div>
+                  </div>
+                  <div class="ttt-grid" id="ttt-grid"></div>
+                  <button class="minigame-restart-btn" id="ttt-restart" data-i18n="game_restart" type="button">🔄 Restart</button>
+                </div>
               </div>
+              <div class="scanline-overlay"></div>
             </div>
-            <div class="scanline-overlay"></div>
-          </div>
 
           <!-- State 3: Ready (Comparison View) -->
           <div class="frame-state hidden" id="state-ready">
@@ -243,13 +261,13 @@
               <!-- Before (Original) Image -->
               <div class="comparison-panel before-panel" id="before-panel">
                 <img id="img-original" src="assets/default.png" alt="Original Photo">
-                <div class="img-label">Source</div>
+                <div class="img-label" data-i18n="label_source">Source</div>
               </div>
 
               <!-- After (Transformed) Image -->
               <div class="comparison-panel after-panel" id="after-panel">
                 <img id="img-transformed" src="assets/default.png" alt="Transformed Photo">
-                <div class="img-label label-transformed">Styled Output</div>
+                <div class="img-label label-transformed" data-i18n="label_styled_output">Styled Output</div>
               </div>
 
               <!-- Center Split Slider Bar -->
@@ -264,15 +282,15 @@
         <div class="canvas-controls-section disabled" id="canvas-controls-section">
           <div class="filter-controls-grid">
             <div class="filter-control">
-              <label for="filter-contrast">Contrast</label>
+              <label for="filter-contrast" data-i18n="control_contrast">Contrast</label>
               <input type="range" id="filter-contrast" min="50" max="150" value="100">
             </div>
             <div class="filter-control">
-              <label for="filter-brightness">Brightness</label>
+              <label for="filter-brightness" data-i18n="control_brightness">Brightness</label>
               <input type="range" id="filter-brightness" min="50" max="150" value="100">
             </div>
             <div class="filter-control">
-              <label for="filter-saturation">Saturation</label>
+              <label for="filter-saturation" data-i18n="control_saturation">Saturation</label>
               <input type="range" id="filter-saturation" min="50" max="150" value="100">
             </div>
           </div>
@@ -282,22 +300,22 @@
         <div class="sns-download-section disabled" id="sns-download-section">
           <div class="panel-header-sub" style="margin-bottom: 8px;">
             <span class="step-num-sub">06</span>
-            <h3>SNS Export Settings</h3>
+            <h3 data-i18n="sns_export_title">SNS Export Settings</h3>
           </div>
           <div class="sns-options-grid">
             <div class="sns-select-wrapper">
-              <label for="sns-preset-select" class="sns-label">SNS Format</label>
+              <label for="sns-preset-select" class="sns-label" data-i18n="sns_format_label">SNS Format</label>
               <select id="sns-preset-select" class="sns-select">
-                <option value="original" selected>Original Size (1:1 Square)</option>
-                <option value="x-profile">X (Twitter) Profile (400x400)</option>
-                <option value="x-post">X (Twitter) Post (1200x675, 16:9)</option>
-                <option value="linkedin-profile">LinkedIn Profile (400x400)</option>
-                <option value="linkedin-post">LinkedIn Post (1200x627, 1.91:1)</option>
-                <option value="threads-profile">Threads Profile (320x320)</option>
-                <option value="threads-post">Threads Post (1080x1350, 4:5)</option>
-                <option value="facebook-profile">Facebook Profile (170x170)</option>
-                <option value="facebook-post">Facebook Post (1200x630, 1.91:1)</option>
-                <option value="instagram-story">Instagram Story (1080x1920, 9:16)</option>
+                <option value="original" data-i18n="sns_opt_original" selected>Original Size (1:1 Square)</option>
+                <option value="x-profile" data-i18n="sns_opt_x_profile">X (Twitter) Profile (400x400)</option>
+                <option value="x-post" data-i18n="sns_opt_x_post">X (Twitter) Post (1200x675, 16:9)</option>
+                <option value="linkedin-profile" data-i18n="sns_opt_linkedin_profile">LinkedIn Profile (400x400)</option>
+                <option value="linkedin-post" data-i18n="sns_opt_linkedin_post">LinkedIn Post (1200x627, 1.91:1)</option>
+                <option value="threads-profile" data-i18n="sns_opt_threads_profile">Threads Profile (320x320)</option>
+                <option value="threads-post" data-i18n="sns_opt_threads_post">Threads Post (1080x1350, 4:5)</option>
+                <option value="facebook-profile" data-i18n="sns_opt_facebook_profile">Facebook Profile (170x170)</option>
+                <option value="facebook-post" data-i18n="sns_opt_facebook_post">Facebook Post (1200x630, 1.91:1)</option>
+                <option value="instagram-story" data-i18n="sns_opt_instagram_story">Instagram Story (1080x1920, 9:16)</option>
               </select>
             </div>
             <div class="sns-crop-preview-info" id="sns-crop-info">
@@ -310,97 +328,97 @@
         <div class="action-tools disabled" id="action-tools">
           <button class="secondary-btn" id="save-history-btn" type="button">
             <i data-lucide="bookmark" class="btn-icon-inline"></i>
-            <span>Add to Collection</span>
+            <span data-i18n="btn_add_collection">Add to Collection</span>
           </button>
           <button class="secondary-btn" id="share-card-btn" type="button">
             <i data-lucide="share-2" class="btn-icon-inline"></i>
-            <span>Share Card</span>
+            <span data-i18n="btn_share_card">Share Card</span>
           </button>
           <a id="download-link" class="primary-btn" href="#" download="persona-avatar.png">
-            <span>Download Image</span>
+            <span data-i18n="btn_download_image">Download Image</span>
           </a>
         </div>
       </section>
     </main>
 
-    <!-- History Log / Collection Gallery -->
-    <section class="gallery-section">
-      <div class="panel-header">
-        <span class="step-num">07</span>
-        <h2>History Collection</h2>
-      </div>
-      <div class="gallery-grid" id="gallery-grid">
-        <div class="gallery-empty" id="gallery-empty">
-          <p>Collection empty. Process and save your first profile.</p>
+      <!-- History Log / Collection Gallery -->
+      <section class="gallery-section">
+        <div class="panel-header">
+          <span class="step-num">07</span>
+          <h2 data-i18n="history_collection_title">History Collection</h2>
         </div>
-      </div>
-    </section>
-  </div>
-
-  <!-- Login Modal -->
-  <div class="modal-overlay hidden" id="login-modal">
-    <div class="modal-card">
-      <div class="modal-header">
-        <span class="modal-title-dot"></span>
-        <h3>Codex CLI Authentication</h3>
-      </div>
-      <div class="modal-body">
-        <div class="login-pulse">
-          <i data-lucide="external-link" class="pulse-icon"></i>
-        </div>
-        <p class="modal-description">브라우저 창에서 ChatGPT OAuth 로그인을 진행해 주세요.</p>
-        <p class="modal-hint">로그인이 완료되면 이 화면이 자동으로 전환됩니다.</p>
-        <div class="status-pulse-bar">
-          <div class="pulse-bar-fill"></div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button class="secondary-btn" id="cancel-login-btn">취소</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Style Library Modal -->
-  <div class="modal-overlay hidden" id="library-modal">
-    <div class="modal-card library-card-modal">
-      <div class="modal-header">
-        <span class="modal-title-dot" style="background-color: var(--color-active); animation: none;"></span>
-        <h3 style="flex-grow: 1;">스타일 라이브러리 (Reactor Prompts)</h3>
-        <span id="library-count-badge" style="font-size:12px;color:var(--text-muted);background:rgba(255,255,255,0.07);padding:3px 10px;border-radius:20px;">로딩중...</span>
-        <div class="search-wrapper">
-          <i data-lucide="search" class="search-icon"></i>
-          <input type="text" id="library-search" placeholder="스타일 검색...">
-        </div>
-      </div>
-      <div class="library-modal-body">
-        <!-- Sidebar Navigation (Categories) -->
-        <aside class="library-sidebar">
-          <button class="sidebar-tab active" data-category="all">전체</button>
-          <button class="sidebar-tab" data-category="today" style="border-left: 2px solid var(--color-active); font-weight:600; color:var(--color-active);">오늘의 밈 🔥</button>
-          <button class="sidebar-tab" data-category="portrait">인물/화보</button>
-          <button class="sidebar-tab" data-category="illustration">일러스트</button>
-          <button class="sidebar-tab" data-category="cosplay">코스프레</button>
-          <button class="sidebar-tab" data-category="photo">감성사진</button>
-          <button class="sidebar-tab" data-category="food">음식/카페</button>
-          <button class="sidebar-tab" data-category="product">제품/광고</button>
-          <button class="sidebar-tab" data-category="character">캐릭터</button>
-          <button class="sidebar-tab" data-category="sticker">스티커</button>
-          <button class="sidebar-tab" data-category="poster">포스터</button>
-          <button class="sidebar-tab" data-category="other">기타</button>
-        </aside>
-        
-        <!-- Grid Container -->
-        <main class="library-grid-container">
-          <div class="library-grid" id="library-grid">
-            <!-- Dynamically populated style cards -->
+        <div class="gallery-grid" id="gallery-grid">
+          <div class="gallery-empty" id="gallery-empty">
+            <p data-i18n="history_collection_empty">Collection empty. Process and save your first profile.</p>
           </div>
-        </main>
-      </div>
-      <div class="modal-footer">
-        <button class="secondary-btn" id="close-library-btn">닫기</button>
+        </div>
+      </section>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal-overlay hidden" id="login-modal">
+      <div class="modal-card">
+        <div class="modal-header">
+          <span class="modal-title-dot"></span>
+          <h3 data-i18n="login_modal_title">Codex CLI Authentication</h3>
+        </div>
+        <div class="modal-body">
+          <div class="login-pulse">
+            <i data-lucide="external-link" class="pulse-icon"></i>
+          </div>
+          <p class="modal-description" data-i18n="login_modal_desc">브라우저 창에서 ChatGPT OAuth 로그인을 진행해 주세요.</p>
+          <p class="modal-hint" data-i18n="login_modal_hint">로그인이 완료되면 이 화면이 자동으로 전환됩니다.</p>
+          <div class="status-pulse-bar">
+            <div class="pulse-bar-fill"></div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="secondary-btn" id="cancel-login-btn" data-i18n="btn_cancel">취소</button>
+        </div>
       </div>
     </div>
-  </div>
+
+    <!-- Style Library Modal -->
+    <div class="modal-overlay hidden" id="library-modal">
+      <div class="modal-card library-card-modal">
+        <div class="modal-header">
+          <span class="modal-title-dot" style="background-color: var(--color-active); animation: none;"></span>
+          <h3 style="flex-grow: 1;" data-i18n="library_modal_title">스타일 라이브러리 (Reactor Prompts)</h3>
+          <span id="library-count-badge" data-i18n="library_loading" style="font-size:12px;color:var(--text-muted);background:rgba(255,255,255,0.07);padding:3px 10px;border-radius:20px;">로딩중...</span>
+          <div class="search-wrapper">
+            <i data-lucide="search" class="search-icon"></i>
+            <input type="text" id="library-search" data-i18n-placeholder="library_search_placeholder" placeholder="스타일 검색...">
+          </div>
+        </div>
+        <div class="library-modal-body">
+          <!-- Sidebar Navigation (Categories) -->
+          <aside class="library-sidebar">
+            <button class="sidebar-tab active" data-category="all" data-i18n="category_all">전체</button>
+            <button class="sidebar-tab" data-category="today" data-i18n="category_today" style="border-left: 2px solid var(--color-active); font-weight:600; color:var(--color-active);">오늘의 밈 🔥</button>
+            <button class="sidebar-tab" data-category="portrait" data-i18n="category_portrait">인물/화보</button>
+            <button class="sidebar-tab" data-category="illustration" data-i18n="category_illustration">일러스트</button>
+            <button class="sidebar-tab" data-category="cosplay" data-i18n="category_cosplay">코스프레</button>
+            <button class="sidebar-tab" data-category="photo" data-i18n="category_photo">감성사진</button>
+            <button class="sidebar-tab" data-category="food" data-i18n="category_food">음식/카페</button>
+            <button class="sidebar-tab" data-category="product" data-i18n="category_product">제품/광고</button>
+            <button class="sidebar-tab" data-category="character" data-i18n="category_character">캐릭터</button>
+            <button class="sidebar-tab" data-category="sticker" data-i18n="category_sticker">스티커</button>
+            <button class="sidebar-tab" data-category="poster" data-i18n="category_poster">포스터</button>
+            <button class="sidebar-tab" data-category="other" data-i18n="category_other">기타</button>
+          </aside>
+          
+          <!-- Grid Container -->
+          <main class="library-grid-container">
+            <div class="library-grid" id="library-grid">
+              <!-- Dynamically populated style cards -->
+            </div>
+          </main>
+        </div>
+        <div class="modal-footer">
+          <button class="secondary-btn" id="close-library-btn" data-i18n="btn_close">닫기</button>
+        </div>
+      </div>
+    </div>
 
   <script src="app.js"></script>
   <script>
