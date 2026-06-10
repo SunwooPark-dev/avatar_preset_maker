@@ -84,6 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let detectedImageType = 'person'; // 'person', 'animal', 'object'
   let isAnalyzingImage = false;
   let todayPrompt = '';
+  let processingStatusInterval = null;
 
   // Initialize App
   init();
@@ -648,13 +649,46 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  const processingMessages = [
+    '얼굴 윤곽 및 이목구비 랜드마크 분석 중...',
+    '선택하신 스타일 프리셋 붓터치 맵핑 중...',
+    '색조 매트릭스 보정 및 입체적 쉐이딩 적용 중...',
+    '얼굴 피부 결 보존 및 미세 텍스처 업스케일링 중...',
+    '최종 아티스틱 합성 및 SNS 내보내기 셋팅 준비 중...'
+  ];
+
+  function startStatusRolling() {
+    if (processingStatusInterval) clearInterval(processingStatusInterval);
+    let index = 0;
+    processingStatus.textContent = processingMessages[index];
+    
+    processingStatusInterval = setInterval(() => {
+      index = (index + 1) % processingMessages.length;
+      processingStatus.textContent = processingMessages[index];
+    }, 2000);
+  }
+
+  function stopStatusRolling() {
+    if (processingStatusInterval) {
+      clearInterval(processingStatusInterval);
+      processingStatusInterval = null;
+    }
+  }
+
   // Simulator Processing Pipeline
   function runTransformation() {
     setInputState(true);
     stateUploadRequired.classList.add('hidden');
     stateReady.classList.add('hidden');
     stateProcessing.classList.remove('hidden');
+    
+    // Smooth scroll to output canvas to improve mobile usability
+    if (displayFrame) {
+      displayFrame.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+    
     startMinigames();
+    startStatusRolling();
 
     // Reset progress fill
     progressBarFill.style.width = '0%';
@@ -672,14 +706,6 @@ document.addEventListener('DOMContentLoaded', () => {
           progress += Math.floor(Math.random() * 4) + 1;
           if (progress > 90) progress = 90;
           progressBarFill.style.width = `${progress}%`;
-
-          if (progress < 30) {
-            processingStatus.textContent = 'Analyzing source image attributes...';
-          } else if (progress < 60) {
-            processingStatus.textContent = 'Generating styled avatar via Image 2.0...';
-          } else {
-            processingStatus.textContent = 'Receiving output image from Codex agent...';
-          }
         }
       }, 700);
 
@@ -782,10 +808,10 @@ document.addEventListener('DOMContentLoaded', () => {
       // Mock / Offline Filter Transformation
       processingTitle.textContent = 'Applying local style filter...';
       const steps = [
-        { prg: 25, text: 'Analyzing image color channels...' },
-        { prg: 50, text: 'Applying local rendering matrix...' },
-        { prg: 80, text: 'Adding style outline overlays...' },
-        { prg: 100, text: 'Styling complete!' }
+        { prg: 25 },
+        { prg: 50 },
+        { prg: 80 },
+        { prg: 100 }
       ];
 
       let currentStepIdx = 0;
@@ -793,7 +819,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (currentStepIdx < steps.length) {
           const step = steps[currentStepIdx];
           progressBarFill.style.width = `${step.prg}%`;
-          processingStatus.textContent = step.text;
           currentStepIdx++;
         } else {
           clearInterval(interval);
@@ -802,11 +827,12 @@ document.addEventListener('DOMContentLoaded', () => {
             setInputState(false);
           }, 300);
         }
-      }, 400);
+      }, 1500); // 1.5 seconds per step, 6s total
     }
   }
 
   function resetProgressState() {
+    stopStatusRolling();
     stopMinigames();
     stateProcessing.classList.add('hidden');
     stateUploadRequired.classList.remove('hidden');
@@ -817,6 +843,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Render & setup transformed results for Mock settings
   function finalizeTransformation() {
+    stopStatusRolling();
     stopMinigames();
     stateProcessing.classList.add('hidden');
     stateReady.classList.remove('hidden');

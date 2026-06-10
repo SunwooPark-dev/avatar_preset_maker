@@ -64,6 +64,12 @@
           </div>
         </div>
 
+        <!-- Privacy Shield Banner -->
+        <div class="privacy-shield-banner">
+          <i data-lucide="shield-check" class="shield-icon"></i>
+          <span>원본 사진은 스타일 변환 분석 완료 즉시 완전히 파기되며 서버에 저장되지 않습니다. 안심하고 사용하세요.</span>
+        </div>
+
         <!-- Style Presets -->
         <div class="presets-section">
           <div class="panel-header-sub" style="justify-content: space-between; width: 100%;">
@@ -135,6 +141,7 @@
                 <span id="slider-weight-val">7.5</span>
               </div>
               <input type="range" id="slider-weight" min="1" max="15" step="0.5" value="7.5">
+              <p class="slider-help-text">지시사항 프롬프트를 이미지에 강하게 반영하는 세기입니다.</p>
             </div>
             <div class="slider-item">
               <div class="slider-label">
@@ -142,6 +149,7 @@
                 <span id="slider-closeness-val">80%</span>
               </div>
               <input type="range" id="slider-closeness" min="10" max="100" step="5" value="80">
+              <p class="slider-help-text">높을수록 내 본래 얼굴을 더 가깝게 보존하고 유지합니다.</p>
             </div>
             <div class="slider-item">
               <div class="slider-label">
@@ -149,6 +157,7 @@
                 <span id="slider-detail-val">50%</span>
               </div>
               <input type="range" id="slider-detail" min="0" max="100" step="5" value="50">
+              <p class="slider-help-text">피부 텍스처 및 얼굴 외곽 표현의 정밀도와 선명도를 결정합니다.</p>
             </div>
           </div>
         </div>
@@ -185,7 +194,7 @@
                 <div class="spinner-dot"></div>
               </div>
               <div class="progress-details">
-                <h3 id="processing-title">Rendering style preset...</h3>
+                <h3 id="processing-title">AI 아트 렌더링 중 (약 1분 소요)...</h3>
                 <div class="progress-bar-wrapper">
                   <div class="progress-bar" id="progress-bar-fill"></div>
                 </div>
