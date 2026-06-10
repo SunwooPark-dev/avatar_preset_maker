@@ -1,0 +1,23 @@
+# Audit: Clean Gender Selection Localization & Remove Mixed English
+
+- Date: 2026-06-10
+- Agent: Antigravity
+- Mode: execute | verify
+- Task ID: e81c7c9e-39a7-48aa-b62e-27cb19ebdf8c
+- Why: The Korean localization had mixed English tags like "남성 (Male)", "여성 (Female)", and "임의 (Random)", which decreased the professional look and feel of the service. On initial page load (English), the options in the HTML template were also hardcoded with Korean subtitles.
+- Scope: Correct option labels in `index.html` and localization string mapping in `app.js` to ensure pure localized language display.
+- Files changed:
+  - [index.html](file:///C:/Users/sunwo/.gemini/antigravity-ide/scratch/avatar_preset_maker/index.html)
+  - [app.js](file:///C:/Users/sunwo/.gemini/antigravity-ide/scratch/avatar_preset_maker/app.js)
+- Evidence / Sources:
+  - User feedback indicating language mixed strings are not professional.
+  - Previous E2E test scripts.
+- Commands run:
+  - `py -3.12 tests/verify_ux_hurdles.py`
+- Results:
+  - Successfully removed " (Male)", " (Female)", " (Random)" and " (Mock)" mixed elements from Korean language translations.
+  - Verified dropdown elements show pure languages when selected.
+  - Playwright E2E verification test passed with exit code 0.
+- Risks: None. Minimal impact, purely string resource changes.
+- Rollback: `git checkout index.html app.js`
+- Remaining TODO: Implement SNS crop overlay feature (P2).
